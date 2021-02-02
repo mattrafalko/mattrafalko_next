@@ -28,7 +28,7 @@ const Footer = () => {
 
   return (
     <Fragment>
-      <div className='bg-gray-100 dark:bg-gray-900 fixed bottom-0 px-5 py-2 w-full flex border-t-2 dark:border-indigo-400'>
+      <div className='bg-gray-100 dark:bg-gray-900 fixed bottom-0 px-5 py-2 w-full flex border-t-2 dark:border-indigo-900'>
         <div className='max-w-2xl w-full flex justify-between mx-auto pb-1'>
           {footerIcons}
         </div>
