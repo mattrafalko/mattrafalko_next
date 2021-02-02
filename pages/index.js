@@ -1,65 +1,62 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Head from 'next/head';
+import AboutMe from '../components/sections/AboutMe';
+import Footer from '../components/Footer';
+import { motion } from 'framer-motion';
+import { GithubContext } from '../context/GitHubContext';
+import { LoadingContext } from '../context/LoadingContext';
+import { getGithubProjectdata, getGithubUserData } from '../context/UserData';
+import Resume from '../components/sections/Resume/Resume';
+import Github from '../components/sections/Github/Github';
 
-export default function Home() {
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+const App = ({ userInfo, projectData }) => {
+  if (userInfo.status && userInfo.status !== 200) {
+    console.log(userInfo);
+  } else {
+    return (
+      <html lang='en'>
+        <Head>
+          <title>Matt R</title>
+          <link rel='icon' href='/favicon.ico' />
+          <meta name='description' content='Matt Rafalko. Web Developer.' />
+        </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
+        <LoadingContext.Provider value={{ loading: false }}>
+          <GithubContext.Provider
+            value={{
+              projects: [...projectData],
+              githubUserInfo: { ...userInfo },
+            }}
           >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
+            <AboutMe />
+            <motion.div
+              className='container px-3 py-4 pt-20 mb-24'
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3, duration: 1 }}
+            >
+              <Resume />
+              <Github />
+            </motion.div>
+            <Footer />
+          </GithubContext.Provider>
+        </LoadingContext.Provider>
+      </html>
+    );
+  }
+};
 
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
+export const getServerSideProps = async () => {
+  // Fetch data from external API
+  const userInfo = await getGithubUserData();
+  const projectData = await getGithubProjectdata();
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
-  )
-}
+  // Pass data to the page via props
+  return {
+    props: {
+      userInfo: userInfo.data,
+      projectData: projectData,
+    },
+  };
+};
+
+export default App;
