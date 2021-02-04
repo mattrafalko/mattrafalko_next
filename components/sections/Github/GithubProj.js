@@ -1,7 +1,7 @@
 const GithubProj = ({ project }) => {
   return (
     <div>
-      <div className='mb-4 px-2 py-3 flex flex-col border-2 border-solid border-gray-300 dark:border-gray-700 rounded hover:shadow-md'>
+      <div className='mb-4 px-2 py-3 flex flex-col border-2 border-solid border-gray-300 dark:border-gray-700 rounded hover:shadow-md transition ease-in'>
         <div className='transform -translate-y-7'>
           <span className='md:text-lg text-sm bg-white dark:bg-gray-800 dark:text-gray-200 px-1'>
             {project.name}

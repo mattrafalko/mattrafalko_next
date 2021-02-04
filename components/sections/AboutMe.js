@@ -18,9 +18,9 @@ const AboutMe = () => {
     <div className='bg-gray-100 dark:bg-gray-900 shadow-sm border-b-2 dark:border-indigo-900 lg:max-h-32 lg:mb-8'>
       <div className='container mb-2 max-w-sm lg:max-w-2xl'>
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 38 }}
-          transition={{ delay: 0.5, duration: 0.75 }}
+          transition={{ delay: 0.25, duration: 0.5 }}
           className='bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-indigo-700 rounded px-4 py-3 mx-3 shadow-lg hover:shadow-xl flex justify-between items-center'
         >
           {!loading && githubUserInfo ? (

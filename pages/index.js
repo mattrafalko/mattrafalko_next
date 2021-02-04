@@ -32,7 +32,7 @@ const App = ({ userInfo, projectData }) => {
               className='container px-3 py-4 pt-20 mb-24'
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.3, duration: 1 }}
+              transition={{ delay: 0.25, duration: 0.5 }}
             >
               <Resume />
               <Github />
