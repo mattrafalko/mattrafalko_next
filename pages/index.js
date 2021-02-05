@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 import AboutMe from '../components/sections/AboutMe';
 import Footer from '../components/Footer';
@@ -9,40 +11,44 @@ import Resume from '../components/sections/Resume/Resume';
 import Github from '../components/sections/Github/Github';
 
 const App = ({ userInfo, projectData }) => {
-  if (userInfo.status && userInfo.status !== 200) {
-    console.log(userInfo);
-  } else {
-    return (
-      <html lang='en'>
-        <Head>
-          <title>Matt R</title>
-          <link rel='icon' href='/favicon.ico' />
-          <meta name='description' content='Matt Rafalko. Web Developer.' />
-        </Head>
+  const router = useRouter();
 
-        <LoadingContext.Provider value={{ loading: false }}>
-          <GithubContext.Provider
-            value={{
-              projects: [...projectData],
-              githubUserInfo: { ...userInfo },
-            }}
+  useEffect(() => {
+    if (userInfo.status && userInfo.status !== 200) {
+      router.push('https://www.github.com/mattrafalko');
+    }
+  }, []);
+
+  return (
+    <html lang='en'>
+      <Head>
+        <title>Matt R</title>
+        <link rel='icon' href='/favicon.ico' />
+        <meta name='description' content='Matt Rafalko. Web Developer.' />
+      </Head>
+
+      <LoadingContext.Provider value={{ loading: false }}>
+        <GithubContext.Provider
+          value={{
+            projects: [...projectData],
+            githubUserInfo: { ...userInfo },
+          }}
+        >
+          <AboutMe />
+          <motion.div
+            className='container px-3 py-4 pt-20 mb-24'
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.25, duration: 0.5 }}
           >
-            <AboutMe />
-            <motion.div
-              className='container px-3 py-4 pt-20 mb-24'
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.25, duration: 0.5 }}
-            >
-              <Resume />
-              <Github />
-            </motion.div>
-            <Footer />
-          </GithubContext.Provider>
-        </LoadingContext.Provider>
-      </html>
-    );
-  }
+            <Resume />
+            <Github />
+          </motion.div>
+          <Footer />
+        </GithubContext.Provider>
+      </LoadingContext.Provider>
+    </html>
+  );
 };
 
 export const getServerSideProps = async () => {
@@ -53,7 +59,10 @@ export const getServerSideProps = async () => {
   // Pass data to the page via props
   return {
     props: {
-      userInfo: userInfo.data,
+      userInfo: {
+        ...userInfo.data,
+        status: userInfo.status,
+      },
       projectData: projectData,
     },
   };
