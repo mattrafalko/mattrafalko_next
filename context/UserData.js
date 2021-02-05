@@ -6,7 +6,7 @@ export const getGithubUserData = async () => {
       `https://api.github.com/users/mattrafalko?client_id=${process.env.REACT_APP_GITHUB_CLIENTID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENTSECRET}`
     );
   } catch (e) {
-    console.error(e);
+    return e;
   }
 };
 
