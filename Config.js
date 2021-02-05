@@ -13,7 +13,7 @@ export const userData = {
   resumeData: [
     {
       company: 'Uline',
-      title: 'Software Developer',
+      title: 'Web Developer',
       companySite: 'https://www.uline.com',
       dates: {
         start: '2/2020',
