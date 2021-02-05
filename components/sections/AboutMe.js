@@ -21,7 +21,7 @@ const AboutMe = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 38 }}
           transition={{ delay: 0.25, duration: 0.5 }}
-          className='bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-indigo-700 rounded px-4 py-3 mx-3 shadow-lg hover:shadow-xl flex justify-between items-center'
+          className='bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-indigo-900 rounded px-4 py-3 mx-3 shadow-lg hover:shadow-xl flex justify-between items-center'
         >
           {!loading && githubUserInfo ? (
             <div className='flex flex-col lg:flex-row lg:justify-between lg:w-full w-full mx-auto'>
@@ -31,7 +31,7 @@ const AboutMe = () => {
                   className='text-2xl font-bold text-gray-900 dark:text-gray-100'
                 >
                   <span className='name'> {githubUserInfo.name}</span>
-                  <span className='altName text-red-600'>
+                  <span className='altName text-red-600 dark:text-red-800'>
                     {aboutMe.altName} <Emoji symbol='🇵🇱' label='polish flag' />
                   </span>
                 </h1>
@@ -54,7 +54,7 @@ const AboutMe = () => {
                 </div>
               </div>
               <div className='flex justify-center md:justify-end'>
-                <div className='w-32 h-32 rounded-full overflow-hidden border-2 border-gray-200 dark:border-indigo-500 shadow-2xl lg:shadow-lg mx-auto transform translate-y-16 -mt-16 lg:mt-0 lg:translate-y-0'>
+                <div className='w-32 h-32 rounded-full overflow-hidden border-2 border-gray-200 dark:border-indigo-900 shadow-2xl lg:shadow-lg mx-auto transform translate-y-16 -mt-16 lg:mt-0 lg:translate-y-0'>
                   <Image
                     src={githubUserInfo.avatar_url}
                     alt={aboutMe.imgAlt}
