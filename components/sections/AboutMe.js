@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { LoadingContext } from '../../context/LoadingContext';
 import { GithubContext } from '../../context/GitHubContext';
 import { userData } from '../../Config';
-import Spinner from '../loaders/Spinner';
 import Emoji from '../Emoji';
 import Image from 'next/image';
 
@@ -39,7 +38,7 @@ const AboutMe = () => {
                 <h2 className='font-md text-gray-800 dark:text-gray-200 mb-2'>
                   {currentEmployer.title} •{' '}
                   <a
-                    className='text-gray-600 dark:text-indigo-300'
+                    className='text-gray-600 dark:text-indigo-300 '
                     href={currentEmployer.companySite}
                     target='_blank'
                     rel='noreferrer'
@@ -65,7 +64,19 @@ const AboutMe = () => {
               </div>
             </div>
           ) : (
-            <Spinner />
+            <div class='rounded-md p-4 w-full mx-auto'>
+              <div class='animate-pulse flex space-x-4'>
+                <div class='flex-1 space-y-4 py-1'>
+                  <div class='h-4 bg-gray-200 rounded w-1/3'></div>
+                  <div class='space-y-2'>
+                    <div class='h-4 bg-gray-200 rounded w-4/6'></div>
+                    <div class='h-4 bg-gray-200 rounded w-5/6'></div>
+                    <div class='h-4 bg-gray-200 rounded w-3/5'></div>
+                  </div>
+                </div>
+                <div class='rounded-full bg-gray-200 h-32 w-32'></div>
+              </div>
+            </div>
           )}
         </motion.div>
       </div>
