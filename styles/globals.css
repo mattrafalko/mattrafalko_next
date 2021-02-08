@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  @apply dark:bg-gray-800;
-}
-
 svg {
   fill: black;
 }
@@ -16,6 +12,9 @@ svg {
   }
   img {
     filter: brightness(0.8) contrast(1.2);
+  }
+  html {
+    @apply bg-gray-800;
   }
 }
 
