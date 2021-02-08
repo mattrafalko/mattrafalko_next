@@ -2,8 +2,7 @@ import groq from 'groq';
 import imageUrlBuilder from '@sanity/image-url';
 import BlockContent from '@sanity/block-content-to-react';
 import client from '../../client';
-import Image from 'next/image';
-
+import moment from 'moment';
 const urlFor = (source) => {
   return imageUrlBuilder(client).image(source);
 };
@@ -13,29 +12,30 @@ const Post = (props) => {
     title = 'Missing title',
     name = 'Missing name',
     categories,
-    authorImage,
     body = [],
     mainImage,
+    _createdAt,
   } = props;
 
+  const timestamp = moment(Date(_createdAt).toString()).format('l');
+
   return (
-    <article className='max-w-sm lg:max-w-2xl mx-auto mt-6'>
-      <h1 className='text-3xl mb-2'>{title}</h1>
+    <article className='max-w-sm lg:max-w-2xl px-2 mx-auto mt-4 mb-8'>
+      <h1 className='text-3xl font-semibold mb-2 dark:text-gray-200'>
+        {title}
+      </h1>
       <div className='flex flex-col mb-2'>
         <div className='flex items-center w-full mb-2 justify-between'>
           <div className='flex items-center'>
-            {authorImage && (
-              <div className='rounded-full h-5 w-5 overflow-hidden'>
-                <img src={urlFor(authorImage).url()} />
-              </div>
-            )}
-            <h2 className='ml-2 text-xs'>{name}</h2>
+            <h2 className='text-sm dark:text-gray-200 font-light'>
+              {name} • {timestamp}
+            </h2>
           </div>
           {categories && (
             <span>
               {categories.map((category) => (
                 <span
-                  className='px-1 py.1 bg-gray-200 rounded text-gray-500 text-xs'
+                  className='px-1 py-1 bg-gray-200 dark:bg-gray-700 rounded text-gray-500 dark:text-gray-100 font-light text-xs'
                   key={category}
                 >
                   {category}
@@ -51,6 +51,8 @@ const Post = (props) => {
         className='w-full h-auto mb-3'
       />
       <BlockContent
+        id='post'
+        className='dark:text-gray-200'
         blocks={body}
         imageOptions={{ w: 320, h: 240, fit: 'max' }}
         {...client.config()}
@@ -65,11 +67,11 @@ const query = groq`*[_type == "post" && slug.current == $slug][0]{
   "categories": categories[]->title,
   "authorImage": author->image,
   body,
-  mainImage
+  mainImage, 
+  _createdAt
 }`;
 
 Post.getInitialProps = async function (context) {
-  // It's important to default the slug so that it doesn't return "undefined"
   const { slug = '' } = context.query;
   return await client.fetch(query, { slug });
 };

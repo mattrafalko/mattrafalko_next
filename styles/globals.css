@@ -50,3 +50,20 @@ svg {
   @apply mx-auto;
   @apply max-w-2xl;
 }
+
+#post > h2,
+h3,
+h4,
+p {
+  @apply mb-2;
+}
+
+#post > ul {
+  @apply list-disc;
+  @apply mb-2;
+}
+
+#post > ol {
+  @apply list-decimal;
+  @apply mb-2;
+}
