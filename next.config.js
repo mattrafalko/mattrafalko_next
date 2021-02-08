@@ -1,6 +1,6 @@
 module.exports = {
   images: {
-    domains: ['avatars.githubusercontent.com'],
+    domains: ['avatars.githubusercontent.com', 'cdn.sanity.io'],
   },
   webpack(config) {
     config.module.rules.push({
