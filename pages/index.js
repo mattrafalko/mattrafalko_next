@@ -9,10 +9,14 @@ import { LoadingContext } from '../context/LoadingContext';
 import { getGithubProjectdata, getGithubUserData } from '../context/UserData';
 import Resume from '../components/sections/Resume/Resume';
 import Github from '../components/sections/Github/Github';
+import Posts from '../components/Posts/Posts';
+import client from '../client';
+import groq from 'groq';
 
-const App = ({ userInfo, projectData }) => {
+const App = (props) => {
+  const { userInfo = {}, projectData = [], posts = [] } = props;
+
   const router = useRouter();
-
   useEffect(() => {
     if (userInfo.status && userInfo.status !== 200) {
       router.push('https://www.github.com/mattrafalko');
@@ -43,6 +47,7 @@ const App = ({ userInfo, projectData }) => {
           >
             <Resume />
             <Github />
+            <Posts posts={posts} />
           </motion.div>
           <Footer />
         </GithubContext.Provider>
@@ -51,14 +56,16 @@ const App = ({ userInfo, projectData }) => {
   );
 };
 
-export const getServerSideProps = async () => {
-  // Fetch data from external API
+export const getStaticProps = async () => {
   const userInfo = await getGithubUserData();
   const projectData = await getGithubProjectdata();
+  const posts = await client.fetch(
+    groq`*[_type == "post"]|order(publishedAt desc)`
+  );
 
-  // Pass data to the page via props
   return {
     props: {
+      posts,
       userInfo: {
         ...userInfo.data,
         status: userInfo.status,
