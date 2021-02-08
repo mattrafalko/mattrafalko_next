@@ -21,7 +21,7 @@ const AboutMe = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 38 }}
           transition={{ delay: 0.25, duration: 0.5 }}
-          className='bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-indigo-900 rounded px-4 py-3 mx-3 shadow-lg hover:shadow-xl flex justify-between items-center'
+          className='bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-indigo-900 rounded px-4 py-3 mx-3 shadow-lg hover:shadow-xl flex justify-between items-center transition ease-in'
         >
           {!loading && githubUserInfo ? (
             <div className='flex flex-col lg:flex-row lg:justify-between lg:w-full w-full mx-auto'>
