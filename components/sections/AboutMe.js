@@ -55,12 +55,14 @@ const AboutMe = () => {
               </div>
               <div className='flex justify-center md:justify-end'>
                 <div className='w-32 h-32 rounded-full overflow-hidden border-2 border-gray-200 dark:border-indigo-900 shadow-2xl lg:shadow-lg mx-auto transform translate-y-16 -mt-16 lg:mt-0 lg:translate-y-0'>
-                  <Image
-                    src={githubUserInfo.avatar_url}
-                    alt={aboutMe.imgAlt}
-                    height={128}
-                    width={128}
-                  />
+                  {githubUserInfo.avatar_url && (
+                    <Image
+                      src={githubUserInfo?.avatar_url}
+                      alt={aboutMe.imgAlt}
+                      height={128}
+                      width={128}
+                    />
+                  )}
                 </div>
               </div>
             </div>
