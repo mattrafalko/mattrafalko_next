@@ -9,8 +9,6 @@ import { LoadingContext } from '../context/LoadingContext';
 import { getGithubProjectdata, getGithubUserData } from '../context/UserData';
 import Resume from '../components/sections/Resume/Resume';
 import Github from '../components/sections/Github/Github';
-import client from '../client';
-import groq from 'groq';
 
 const App = (props) => {
   const { userInfo = {}, projectData = [] } = props;
