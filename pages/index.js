@@ -9,12 +9,11 @@ import { LoadingContext } from '../context/LoadingContext';
 import { getGithubProjectdata, getGithubUserData } from '../context/UserData';
 import Resume from '../components/sections/Resume/Resume';
 import Github from '../components/sections/Github/Github';
-import Posts from '../components/Posts/Posts';
 import client from '../client';
 import groq from 'groq';
 
 const App = (props) => {
-  const { userInfo = {}, projectData = [], posts = [] } = props;
+  const { userInfo = {}, projectData = [] } = props;
 
   const router = useRouter();
   useEffect(() => {
@@ -47,7 +46,6 @@ const App = (props) => {
           >
             <Resume />
             <Github />
-            <Posts posts={posts} />
           </motion.div>
           <Footer />
         </GithubContext.Provider>
@@ -59,13 +57,9 @@ const App = (props) => {
 export const getStaticProps = async () => {
   const userInfo = await getGithubUserData();
   const projectData = await getGithubProjectdata();
-  const posts = await client.fetch(
-    groq`*[_type == "post"]|order(publishedAt desc)`
-  );
 
   return {
     props: {
-      posts,
       userInfo: {
         ...userInfo.data,
         status: userInfo.status,

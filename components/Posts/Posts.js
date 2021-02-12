@@ -1,11 +1,8 @@
 import React from 'react';
-import client from '../../client';
-import imageUrlBuilder from '@sanity/image-url';
 import Link from 'next/link';
 
 const Posts = (props) => {
   const { posts = [] } = props;
-
   return (
     <div>
       <h2 className='text-lg font-semibold mb-2'>Posts</h2>
