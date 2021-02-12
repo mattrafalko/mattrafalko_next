@@ -47,7 +47,7 @@ const Post = (props) => {
       </div>
       <img
         src={urlFor(mainImage).url()}
-        alt='Author is Kap'
+        alt='generic image'
         className='w-full h-auto mb-3'
       />
       <BlockContent
