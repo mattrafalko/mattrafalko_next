@@ -26,18 +26,15 @@ const AboutMe = () => {
           {!loading && githubUserInfo ? (
             <div className='flex flex-col lg:flex-row lg:justify-between lg:w-full w-full mx-auto'>
               <div className='flex flex-col items-center lg:items-baseline '>
-                <h1
-                  id='names'
-                  className='text-2xl font-bold text-gray-900 dark:text-gray-100'
-                >
+                <h1 id='names' className='text-2xl font-bold text-gray-900'>
                   <span className='name'> {githubUserInfo.name}</span>
                   <span className='altName text-red-600 dark:text-red-800'>
                     {aboutMe.altName} <Emoji symbol='🇵🇱' label='polish flag' />
                   </span>
                 </h1>
 
-                <h2 className='font-md text-gray-800 dark:text-gray-200 mb-2'>
-                  {currentEmployer.title} •{' '}
+                <h2 className='font-md text-gray-800 mb-2'>
+                  {githubUserInfo.bio} •{' '}
                   <a
                     className='text-gray-600 dark:text-indigo-300 '
                     href={currentEmployer.companySite}
@@ -48,7 +45,7 @@ const AboutMe = () => {
                   </a>
                 </h2>
                 <div className='flex flex-col mb-2 text-center lg:text-left'>
-                  <p className='text-gray-700 dark:text-gray-200 lg:whitespace-pre-wrap'>
+                  <p className='text-gray-700 lg:whitespace-pre-wrap'>
                     {aboutMe.description}
                   </p>
                 </div>

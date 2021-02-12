@@ -6,14 +6,14 @@ export const userData = {
   },
   aboutMe: {
     description:
-      'Full-stack developer with a passion for anything front-end.\nLets work together.',
+      'Web developer with a passion for anything front-end.\nLets work together.',
     imgAlt: 'My dog Apollo and I',
     altName: 'Mateusz Rafałko',
   },
   resumeData: [
     {
       company: 'Uline',
-      title: 'Web Developer',
+      title: 'Software Developer',
       companySite: 'https://www.uline.com',
       dates: {
         start: '2/2020',

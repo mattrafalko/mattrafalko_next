@@ -8,8 +8,7 @@ const Posts = (props) => {
 
   return (
     <div>
-      <h2>Blog Posts</h2>
-
+      <h2 className='text-lg font-semibold mb-2'>Posts</h2>
       <div>
         {posts &&
           posts.map((post, index) => (

@@ -27,7 +27,7 @@ export const getGithubProjectdata = async () => {
     );
     projects = projects.data.filter((x) => x.fork === false);
   } catch (e) {
-    console.error(e);
+    return e;
   }
   return projects;
 };

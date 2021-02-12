@@ -10,9 +10,7 @@ const Github = () => {
 
   return (
     <div>
-      <h1 className='text-lg font-bold mb-4 mt-4 dark:text-gray-200'>
-        Projects
-      </h1>
+      <h1 className='text-lg font-semibold mb-4 mt-4'>Projects</h1>
       <div>
         {!loading && projects && projects.length > 0 ? (
           projects.map((project, i) => <GithubProj project={project} key={i} />)
